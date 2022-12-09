@@ -32,7 +32,14 @@ public class AddressController {
         return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
 
-   
+    @GetMapping("/addresses/{id}")
+    public ResponseEntity<Address> getAddressesByEmployeeId(@PathVariable(value = "id") Long id) {
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found Comment with id = " + id));
+
+        return new ResponseEntity<>(address, HttpStatus.OK);
+
+    }
 
     @PostMapping("/employees/{employeeId}/addresses")
     public ResponseEntity<Address> createComment(@PathVariable(value = "employeeId") Long employeeId,

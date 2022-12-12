@@ -31,6 +31,13 @@ public class AddressController {
         List<Address> addresses = addressRepository.findByEmployeeId(employeeId);
         return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
+    
+    @GetMapping("/addresses/{id}")
+    public ResponseEntity<Address> getAddressesByEmployeeId(@PathVariable(value = "id") Long id) {
+        Address address = addressRepository.findById(id)
+             .orElseThrow(() -> new ResourceNotFoundException("Not found Comment with id = " + id));
+          return new ResponseEntity<>(address, HttpStatus.OK);
+    
 
 
 
